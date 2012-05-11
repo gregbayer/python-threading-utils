@@ -3,8 +3,8 @@
 A set of helper classes and functions that make it easier to work with threads in Python.
 
 * ThreadedWorker - Makes it easy to create a thread that will pull work from a syncronized work_queue and write it to a syncronized result_queue.
-* start_logging_with_thread_info - Helper to add thread id to all log messages. (assumes there is a root logging handler already)
-* stop_logging_with_thread_info - Helper to remove thread id from all log messages. (assumes there is a root logging handler already)
+* start_logging_with_thread_info - Helper to add thread id to all log messages. (may fail in some logging environments)
+* stop_logging_with_thread_info - Helper to remove thread id from all log messages. (may fail in some logging environments)
 
 # ThreadedWorker Example
 

@@ -82,12 +82,18 @@ class ThreadedWorker(threading.Thread):
 
 
 def start_logging_with_thread_info():
-    formatter = logging.Formatter('[thread %(thread)-3s] %(message)s')
-    logging.getLogger().handlers[0].setFormatter(formatter)
+    try:
+        formatter = logging.Formatter('[thread %(thread)-3s] %(message)s')
+        logging.getLogger().handlers[0].setFormatter(formatter)
+    except:
+        logging.exception('Failed to start logging with thread info')
 
 
 def stop_logging_with_thread_info():
-    formatter = logging.Formatter('%(message)s')
-    logging.getLogger().handlers[0].setFormatter(formatter)
+    try:
+        formatter = logging.Formatter('%(message)s')
+        logging.getLogger().handlers[0].setFormatter(formatter)
+    except:
+        logging.exception('Failed to stop logging with thread info')
 
 
