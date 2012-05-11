@@ -28,7 +28,7 @@ class ThreadedWorker(threading.Thread):
     
     def main():
         # spawn a pool of threads, and pass them queue instance 
-        for i in range(5):
+        for i in range(3):
             t = ThreadedWorker(work_queue, result_queue, work_func=process_url)
             t.setDaemon(True)
             t.start()
