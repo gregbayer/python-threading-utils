@@ -40,9 +40,9 @@ A set of helper classes and functions that make it easier to work with threads i
 
 
 # Dependencies: 
-* [python threading](http://docs.python.org/library/threading.html)
-* [python Queue](http://docs.python.org/library/queue.html)
+* [Python threading](http://docs.python.org/library/threading.html)
+* [Python Queue](http://docs.python.org/library/queue.html)
 
 
 # References
-* [ibm article on python threading](http://www.ibm.com/developerworks/aix/library/au-threadingpython/)
+* [IBM article on python threading](http://www.ibm.com/developerworks/aix/library/au-threadingpython/)
