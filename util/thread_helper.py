@@ -8,6 +8,46 @@
 import threading
 import logging
 import sys
+import Queue
+
+def do_threaded_work(work_items, work_func, num_threads=None, per_sync_timeout=1):
+    """ Executes work_func on each item in work_items. Order is not preserved.
+        - num_threads        Default: len(work_items)  --- Number of threads to use process items in work_items.
+        - per_sync_timeout   Default: 1              --- Each syncronized operation can optionally timeout.
+        
+        Return: --- list of results from applying work_func to each work_item. Order is not preserved.
+    """
+    if not num_threads:
+        num_threads = len(work_items)
+    
+    work_queue = Queue.Queue()
+    result_queue = Queue.Queue()
+
+    for work_item in work_items:
+        work_queue.put(work_item)
+
+    start_logging_with_thread_info()
+    
+    #spawn a pool of threads, and pass them queue instance 
+    for _ in range(num_threads):
+        t = ThreadedWorker(work_queue, result_queue, work_func=work_func, queue_timeout=per_sync_timeout)
+        t.setDaemon(True)
+        t.start()
+
+    work_queue.join()
+    stop_logging_with_thread_info()
+    
+    logging.info('work_queue joined')
+    
+    result_items = []
+    while not result_queue.empty():
+        result = result_queue.get(timeout=per_sync_timeout)
+        logging.info('found result[:500]: ' + repr(result)[:500])
+        if result:
+            result_items.append(result)
+    
+    return result_items
+
 
 class ThreadedWorker(threading.Thread):
     """ Generic Threaded Worker
@@ -95,5 +135,4 @@ def stop_logging_with_thread_info():
         logging.getLogger().handlers[0].setFormatter(formatter)
     except:
         logging.exception('Failed to stop logging with thread info')
-
-
+        
