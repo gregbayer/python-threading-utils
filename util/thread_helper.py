@@ -11,11 +11,28 @@ import sys
 import Queue
 
 def do_threaded_work(work_items, work_func, num_threads=None, per_sync_timeout=1):
-    """ Executes work_func on each item in work_items. Order is not preserved.
-        - num_threads        Default: len(work_items)  --- Number of threads to use process items in work_items.
-        - per_sync_timeout   Default: 1              --- Each syncronized operation can optionally timeout.
+    """ Executes work_func on each work_item. Note: Order is not preserved.
         
-        Return: --- list of results from applying work_func to each work_item. Order is not preserved.
+        Parameters:
+        - num_threads        Default: len(work_items)  --- Number of threads to use process items in work_items.
+        - per_sync_timeout   Default: 1                --- Each synchronized operation can optionally timeout.
+        
+        Return: 
+        --- list of results from applying work_func to each work_item. Order is not preserved.
+        
+        Example:
+        
+        def process_url(url):
+            # TODO: Do some work with the url
+            return url
+        
+        urls_to_process = ["http://url1.com", "http://url2.com", "http://site1.com", "http://site2.com"]
+
+        # process urls in parallel
+        result_items = do_threaded_work(urls_to_process, process_url)
+        
+        # print results
+        print repr(result_items)
     """
     if not num_threads:
         num_threads = len(work_items)
