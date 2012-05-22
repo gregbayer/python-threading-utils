@@ -16,7 +16,7 @@ def do_threaded_work(work_items, work_func, num_threads=None, per_sync_timeout=1
         Parameters:
         - num_threads               Default: len(work_items)  --- Number of threads to use process items in work_items.
         - per_sync_timeout          Default: 1                --- Each synchronized operation can optionally timeout.
-        - preserve_result_ordering  Degault: True             --- Reorders result_item to match original work_items ordering.
+        - preserve_result_ordering  Default: True             --- Reorders result_item to match original work_items ordering.
         
         Return: 
         --- list of results from applying work_func to each work_item. Order is optionally preserved.
