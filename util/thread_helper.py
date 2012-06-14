@@ -1,5 +1,5 @@
 ################################################################################
-# util/threading_helper.py
+# util/thread_helper.py
 # 
 # Created by Greg Bayer <greg@gbayer.com>.
 # Open sourced at http://github.com/gregbayer/python-threading-utils
